@@ -33,6 +33,7 @@ const StyledTugBar = styled.div<StyleProps>`
     background-color: ${colorRed};
     width: 100%;
     height: ${(props) => `${props.percent}%`};
+    min-height: 9%;
   }
   .blue-section {
     display: flex;
@@ -42,14 +43,15 @@ const StyledTugBar = styled.div<StyleProps>`
     background-color: ${colorBlue};
     width: 100%;
     height: ${(props) => `calc(100% - ${props.percent}%)`};
+    min-height: 9%;
   }
 `;
 
 const StyledPausedIndicator = styled.div`
   position: absolute;
   font-size: 3rem;
-  transform: translateY(-3rem);
-  padding: 3rem 0;
+  transform: translateY(-1rem);
+  padding: 1rem 0;
   background-color: ${colorWhite};
   color: ${colorGrey};
   width: 100%;

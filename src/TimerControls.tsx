@@ -96,7 +96,7 @@ interface Props {
 }
 
 const TimerControls: React.FC<Props> = ({ setTimingState }) => {
-  const [settingsOpened, setSettingsOpened] = useState(true);
+  const [settingsOpened, setSettingsOpened] = useState(false);
   const { initialTime, setInitialTime } = useContext(SettingsContext);
 
   const onPressReset = () => {
