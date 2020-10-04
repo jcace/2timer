@@ -44,16 +44,13 @@ const NumberInput: React.FC<Props> = ({ initialValue, label, onSubmit }) => {
       <label>{label}</label>
       <StyledInputField
         type="number"
+        min="2"
+        max="999"
+        step="1"
         value={value}
         onChange={(e) => {
           const num = Number(e.target.value);
-          if (num > 999) {
-            setValue(999);
-          } else if (num < 1) {
-            setValue(1);
-          } else {
-            setValue(num);
-          }
+          setValue(num);
         }}
       />
       <StyledButton

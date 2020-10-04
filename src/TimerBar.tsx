@@ -49,9 +49,9 @@ const StyledTugBar = styled.div<StyleProps>`
 
 const StyledPausedIndicator = styled.div`
   position: absolute;
-  font-size: 3rem;
-  transform: translateY(-1rem);
-  padding: 1rem 0;
+  font-size: 2.3rem;
+  transform: translateY(-2rem);
+  padding: 0.5rem 0;
   background-color: ${colorWhite};
   color: ${colorGrey};
   width: 100%;
