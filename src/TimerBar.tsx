@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { SettingsContext } from "./SettingsContext";
@@ -128,8 +129,14 @@ const TimerBar: React.FC<Props> = ({ timingState, setTimingState }) => {
       default:
         setRunningTimer(0);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timingState]);
+
+  useEffect(() => {
+    setTimingState(TimingState.RESET);
+    setTimerRed(initialTime);
+    setTimerBlue(initialTime);
+    setRunningTimer(0);
+  }, [initialTime]);
 
   return (
     <div>

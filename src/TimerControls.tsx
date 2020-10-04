@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { SettingsContext } from "./SettingsContext";
 import { colorGrey, colorPlum, colorWhite } from "./styles";
+import NumberInput from "./TextInput";
 import { TimingState } from "./TimerBar";
 
 const StyledControls = styled.div`
@@ -50,16 +52,26 @@ const StyledModal = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   pointer-events: none;
   color: ${colorWhite};
+  text-align: center;
 
   &.visible {
     pointer-events: all;
     opacity: 1;
   }
+
+  h1 {
+    margin-top: 10px;
+    font-size: 2rem;
+  }
+
+  img {
+    margin-top: 1rem;
+  }
 `;
 
 const StyledCloseModalButton = styled.div`
-  display: fixed;
-  top: 20px;
+  position: fixed;
+  bottom: 0;
   height: 10vh;
   width: 100%;
   background-color: ${colorPlum};
@@ -73,12 +85,20 @@ const StyledCloseModalButton = styled.div`
   }
 `;
 
+const StyledInputContainer = styled.div`
+  margin-top: 35vh;
+  display: flex;
+  justify-content: center;
+`;
+
 interface Props {
   setTimingState: (newState: TimingState) => void;
 }
 
 const TimerControls: React.FC<Props> = ({ setTimingState }) => {
-  const [settingsOpened, setSettingsOpened] = useState(false);
+  const [settingsOpened, setSettingsOpened] = useState(true);
+  const { initialTime, setInitialTime } = useContext(SettingsContext);
+
   const onPressReset = () => {
     setTimingState(TimingState.RESET);
   };
@@ -95,9 +115,22 @@ const TimerControls: React.FC<Props> = ({ setTimingState }) => {
       </StyledControls>
 
       <StyledModal className={settingsOpened ? "visible" : ""}>
-        <h1>Tug-o-War Timer</h1>
+        <h1>2ty.me 2-Sided Timer</h1>
 
-        <p>Designed and built by Jason Cihelka</p>
+        <h2>Designed and built by Jason Cihelka</h2>
+
+        <a href="https://github.com/jcace/2timer" target="_blank">
+          <img src="/github.png" width="30px" />
+        </a>
+
+        <StyledInputContainer>
+          <NumberInput
+            initialValue={initialTime}
+            label="Initial Timer Value"
+            onSubmit={(val) => setInitialTime(val)}
+          />
+        </StyledInputContainer>
+
         <StyledCloseModalButton onClick={() => setSettingsOpened(false)}>
           <p>CLOSE</p>
         </StyledCloseModalButton>
