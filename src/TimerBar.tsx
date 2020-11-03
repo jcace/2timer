@@ -33,7 +33,8 @@ const StyledTugBar = styled.div<StyleProps>`
     background-color: ${colorRed};
     width: 100%;
     height: ${(props) => `${props.percent}%`};
-    min-height: 9%;
+    max-height: 85%;
+    min-height: 15%;
   }
   .blue-section {
     display: flex;
@@ -43,7 +44,8 @@ const StyledTugBar = styled.div<StyleProps>`
     background-color: ${colorBlue};
     width: 100%;
     height: ${(props) => `calc(100% - ${props.percent}%)`};
-    min-height: 9%;
+    max-height: 85%;
+    min-height: 15%;
   }
 `;
 
@@ -109,22 +111,24 @@ const TimerBar: React.FC<Props> = ({ timingState, setTimingState }) => {
         break;
       case TimingState.TIMING_BLUE:
         const blueTimer = setInterval(() => {
-          setTimerRed((currentTime) => (currentTime > 1 ? currentTime - 1 : 0));
-          setTimerBlue((currentTime) =>
-            currentTime < maxTime ? currentTime + 1 : maxTime
+          setTimerRed((currentTime) =>
+            currentTime > 0.1 ? currentTime - 0.1 : 0
           );
-        }, 1000);
+          setTimerBlue((currentTime) =>
+            currentTime < maxTime ? currentTime + 0.1 : maxTime
+          );
+        }, 100);
         setRunningTimer(blueTimer);
         break;
       case TimingState.TIMING_RED:
         const redTimer = setInterval(() => {
           setTimerBlue((currentTime) =>
-            currentTime > 1 ? currentTime - 1 : 0
+            currentTime > 0.1 ? currentTime - 0.1 : 0
           );
           setTimerRed((currentTime) =>
-            currentTime < maxTime ? currentTime + 1 : maxTime
+            currentTime < maxTime ? currentTime + 0.1 : maxTime
           );
-        }, 1000);
+        }, 100);
         setRunningTimer(redTimer);
         break;
       case TimingState.PAUSE:
@@ -144,7 +148,7 @@ const TimerBar: React.FC<Props> = ({ timingState, setTimingState }) => {
     <div>
       <StyledTugBar percent={(timerRed / maxTime) * 100}>
         <div className="red-section" onClick={onPressStartRed}>
-          <h2>{timerRed > 0 ? `${timerRed}s` : ""}</h2>
+          <h2>{timerRed > 0 ? `${timerRed.toFixed(1)}s` : ""}</h2>
           <div>
             {redWins && (
               <h3>
@@ -160,7 +164,7 @@ const TimerBar: React.FC<Props> = ({ timingState, setTimingState }) => {
           <StyledPausedIndicator>PAUSED</StyledPausedIndicator>
         )}
         <div className="blue-section" onClick={onPressStartBlue}>
-          <h2>{timerBlue > 0 ? `${timerBlue}s` : ""}</h2>
+          <h2>{timerBlue > 0 ? `${timerBlue.toFixed(1)}s` : ""}</h2>
           <div>
             {blueWins && (
               <h3>
