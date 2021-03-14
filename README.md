@@ -10,7 +10,7 @@ by [Jason Cihelka](https://github.com/jcace)
 
 
 # How-to
-![mockup](mockup.png)
+<img src="mockup.png" width="400">
 
 1. Tap the red section to start the timer for red team, blue section to start the timer for blue team
 2. Once timer is running, tap anywhere to pause
